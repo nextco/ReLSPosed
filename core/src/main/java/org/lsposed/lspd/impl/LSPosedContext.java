@@ -314,6 +314,16 @@ public class LSPosedContext implements XposedInterface {
     }
 
     @Override
+    public void log(int priority, @Nullable String tag, @NonNull String msg, @Nullable Throwable tr) {
+        String logTag = tag != null ? tag : TAG;
+        if (tr != null) {
+            Log.e(logTag, mPackageName + ": " + msg, tr);
+        } else {
+            Log.i(logTag, mPackageName + ": " + msg);
+        }
+    }
+
+    @Override
     public void log(@NonNull String message) {
         Log.i(TAG, mPackageName + ": " + message);
     }
